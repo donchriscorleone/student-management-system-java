@@ -21,4 +21,13 @@ public class Accounts {
     public ArrayList<Account> getAccounts() {
         return accounts;
     }
+
+    public Account findAccount(String studentId) {
+        Account account = null;
+        for (var acc: this.accounts) {
+            if (acc.getStudent().getId().equals(studentId)) account = acc;
+        }
+
+        return account;
+    }
 }

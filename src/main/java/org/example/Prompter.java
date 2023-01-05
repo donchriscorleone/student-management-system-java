@@ -15,13 +15,13 @@ public class Prompter {
     }
 
     public int numberOfNewStudents() {
-        return this.promptInputInt("Enter a number (1-10): ");
+        return this.promptInputInt("Enter a number (1-10): ", 1, 10);
     }
 
     public Student addNewStudent() {
         String firstName = this.promptInputString("Enter your first name: ");
         String lastName = this.promptInputString("Enter your last name: ");
-        int gradeLevel = this.promptInputInt("Enter grade level (1-10): ");
+        int gradeLevel = this.promptInputInt("Enter grade level (1-10): ", 1, 10);
 
         return new Student(firstName, lastName, gradeLevel);
     }
@@ -48,7 +48,7 @@ public class Prompter {
         }
     }
 
-    private String promptInputString(String inputMessage) {
+    public String promptInputString(String inputMessage) {
         while (true) {
             System.out.print(inputMessage);
             String input = this.scanner.nextLine();
@@ -56,12 +56,27 @@ public class Prompter {
         }
     }
 
-    private int promptInputInt(String inputMessage) {
+    public int promptInputInt(String inputMessage, int min, int max) {
+        if (min > max) {
+            max = Integer.MAX_VALUE;
+        }
         while (true) {
             System.out.print(inputMessage);
             int input = this.scanner.nextInt();
             this.scanner.nextLine();
-            if (input > 0 && input < 11) return input;
+            if (input >= min && input <= max) return input;
+        }
+    }
+
+    public float promptInputFloat(String inputMessage, float min, float max) {
+        if (min > max) {
+            max = Float.MAX_VALUE;
+        }
+        while (true) {
+            System.out.print(inputMessage);
+            float input = this.scanner.nextFloat();
+            this.scanner.nextLine();
+            if (input >= min && input <= max) return input;
         }
     }
 

@@ -23,13 +23,19 @@ public class Account {
     }
 
     public void payTuition(float payment) {
+        var temp = balance - payment;
         if (balance <= 0) {
             System.out.println("Student is already fully paid.");
         }
 
-        else {
-            balance -= payment;
+        if (temp < 0) {
+            System.out.println("Fully paid. Here is your change: " + (payment - balance));
+            this.balance = 0;
         }
+        else {
+            this.balance = temp;
+        }
+
     }
 
     public void checkStatus() {
@@ -38,5 +44,9 @@ public class Account {
         System.out.println("Courses enrolled: ");
         this.courses.entrySet().forEach((set) -> System.out.println(set.getValue().getName()));
         System.out.println("Balance: " + this.balance);
+    }
+
+    public Student getStudent() {
+        return student;
     }
 }
