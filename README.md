@@ -54,6 +54,9 @@ Start the project
   java -jar target/*.jar
 ```
 
+## Attribution
+The problem is from a [Master Skills](https://www.youtube.com/watch?v=GOGt7PACl10) youtube video.
+This project is for educational purposes only.
 
 ## Authors
 
