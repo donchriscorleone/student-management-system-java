@@ -3,17 +3,17 @@ package org.example;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class Student {
-    private static AtomicLong unique = new AtomicLong();
-    private static Long uniqueCount;
+    private static AtomicLong uniqueCounter = new AtomicLong();
     private String id;
     private String firstName;
     private String lastName;
     private int gradeLevel;
 
-    public Student(String firstName, String lastName) {
-        this.id = id;
+    public Student(String firstName, String lastName, int gradeLevel) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.gradeLevel = gradeLevel;
+        this.id = this.generateUniqueId();
     }
 
     public String getId() {
@@ -49,8 +49,19 @@ public class Student {
     }
 
     private String generateUniqueId() {
-        Student.uniqueCount = Student.unique.incrementAndGet();
-//      5-digit ID - first number is their grade level
-        return "";
+        StringBuilder builder = new StringBuilder();
+
+        long count = Student.uniqueCounter.incrementAndGet();
+        String first = this.gradeLevel < 10 ? "0" + this.gradeLevel : Integer.toString(this.gradeLevel);
+        String second = count < 10 ? "00" + count : "0" + count;
+
+        builder.append(first);
+        builder.append(second);
+        return builder.toString();
+    }
+
+    @Override
+    public String toString() {
+        return "ID: " + this.id + "\nName: " + this.lastName + ", " + this.firstName + "\nGrade Level: " + this.gradeLevel;
     }
 }
